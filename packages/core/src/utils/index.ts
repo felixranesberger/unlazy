@@ -58,3 +58,19 @@ export function debounce<T extends (...args: any[]) => void>(
     }, delay)
   }
 }
+
+export function waitForElementDimensions<T extends HTMLElement>(element: T): Promise<void> {
+  const { width } = element.getBoundingClientRect()
+  if (width > 0)
+    return Promise.resolve()
+
+  return new Promise((resolve) => {
+    const observer = new ResizeObserver(() => {
+      const { width } = element.getBoundingClientRect()
+      if (width > 0) {
+        observer.disconnect()
+        resolve()
+      }
+    });
+  });
+}
