@@ -1,0 +1,8 @@
+{
+  "name": "@unlazy/nuxt",
+  "version": "0.10.1",
+  "configKey": "unlazy",
+  "compatibility": {
+    "nuxt": "^3.5"
+  }
+}
