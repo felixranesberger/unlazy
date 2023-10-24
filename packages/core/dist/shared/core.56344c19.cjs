@@ -1,6 +1,6 @@
 'use strict';
 
-const png = require('./core.b559407a.cjs');
+const png = require('./core.29729add.cjs');
 
 const DEFAULT_PLACEHOLDER_SIZE = 32;
 const DEFAULT_IMAGE_PLACEHOLDER = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";

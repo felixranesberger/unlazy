@@ -1,6 +1,6 @@
 'use strict';
 
-const png = require('./shared/core.b559407a.cjs');
+const png = require('./shared/core.29729add.cjs');
 
 /**
  * Encodes an RGBA image to a ThumbHash. RGB should not be premultiplied by A.

@@ -1,4 +1,4 @@
-import { c as base64ToBytes, r as rgbaToDataUri } from './shared/core.b9ec43b1.mjs';
+import { c as base64ToBytes, r as rgbaToDataUri } from './shared/core.28fdbedc.mjs';
 
 /**
  * Encodes an RGBA image to a ThumbHash. RGB should not be premultiplied by A.

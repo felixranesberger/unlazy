@@ -1,6 +1,6 @@
-import { D as DEFAULT_IMAGE_PLACEHOLDER, a as DEFAULT_PLACEHOLDER_SIZE, c as createPngDataUri$1 } from './shared/core.b7f7306b.mjs';
-import { t as toElementArray, w as waitForElementDimensions, i as isCrawler, a as isLazyLoadingSupported, d as debounce } from './shared/core.b9ec43b1.mjs';
-export { c as base64ToBytes, g as getScaledDimensions, b as isSSR } from './shared/core.b9ec43b1.mjs';
+import { D as DEFAULT_IMAGE_PLACEHOLDER, a as DEFAULT_PLACEHOLDER_SIZE, c as createPngDataUri$1 } from './shared/core.9dcee909.mjs';
+import { t as toElementArray, w as waitForElementDimensions, i as isCrawler, a as isLazyLoadingSupported, d as debounce } from './shared/core.28fdbedc.mjs';
+export { c as base64ToBytes, g as getScaledDimensions, b as isSSR } from './shared/core.28fdbedc.mjs';
 import { createPngDataUri } from './thumbhash.mjs';
 
 function lazyLoad(selectorsOrElements = 'img[loading="lazy"]', {

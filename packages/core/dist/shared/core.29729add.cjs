@@ -1,3 +1,5 @@
+'use strict';
+
 const isSSR = typeof window === "undefined";
 const isLazyLoadingSupported = !isSSR && "loading" in HTMLImageElement.prototype;
 const isCrawler = !isSSR && (!("onscroll" in window) || /(gle|ing|ro)bot|crawl|spider/i.test(navigator.userAgent));
@@ -48,6 +50,7 @@ function waitForElementDimensions(element) {
         resolve();
       }
     });
+    observer.observe(element);
   });
 }
 
@@ -178,4 +181,12 @@ function rgbaToDataUri(w, h, rgba) {
   return `data:image/png;base64,${base64}`;
 }
 
-export { isLazyLoadingSupported as a, isSSR as b, base64ToBytes as c, debounce as d, getScaledDimensions as g, isCrawler as i, rgbaToDataUri as r, toElementArray as t, waitForElementDimensions as w };
+exports.base64ToBytes = base64ToBytes;
+exports.debounce = debounce;
+exports.getScaledDimensions = getScaledDimensions;
+exports.isCrawler = isCrawler;
+exports.isLazyLoadingSupported = isLazyLoadingSupported;
+exports.isSSR = isSSR;
+exports.rgbaToDataUri = rgbaToDataUri;
+exports.toElementArray = toElementArray;
+exports.waitForElementDimensions = waitForElementDimensions;

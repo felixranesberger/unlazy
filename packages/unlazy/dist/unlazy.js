@@ -1,4 +1,4 @@
-const y = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", z = typeof window > "u", L = !z && "loading" in HTMLImageElement.prototype, v = !z && (!("onscroll" in window) || /(gle|ing|ro)bot|crawl|spider/i.test(navigator.userAgent));
+const v = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", z = typeof window > "u", y = !z && "loading" in HTMLImageElement.prototype, L = !z && (!("onscroll" in window) || /(gle|ing|ro)bot|crawl|spider/i.test(navigator.userAgent));
 function p(t, e = document) {
   return typeof t == "string" ? [...e.querySelectorAll(t)] : t instanceof Element ? [t] : [...t];
 }
@@ -17,6 +17,7 @@ function C(t) {
       const { width: n } = t.getBoundingClientRect();
       n > 0 && (c.disconnect(), s());
     });
+    c.observe(t);
   });
 }
 function w(t = 'img[loading="lazy"]', {
@@ -34,11 +35,11 @@ function w(t = 'img[loading="lazy"]', {
       console.error("[unlazy] Missing `data-src` or `data-srcset` attribute", r);
       return;
     }
-    if (v || !L) {
+    if (L || !y) {
       b(r), l(r), f(r);
       return;
     }
-    if (r.src || (r.src = y), r.complete && r.naturalWidth > 0) {
+    if (r.src || (r.src = v), r.complete && r.naturalWidth > 0) {
       d(r, o);
       return;
     }

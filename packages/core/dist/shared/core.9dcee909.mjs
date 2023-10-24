@@ -1,4 +1,4 @@
-import { g as getScaledDimensions, r as rgbaToDataUri } from './core.b9ec43b1.mjs';
+import { g as getScaledDimensions, r as rgbaToDataUri } from './core.28fdbedc.mjs';
 
 const DEFAULT_PLACEHOLDER_SIZE = 32;
 const DEFAULT_IMAGE_PLACEHOLDER = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";

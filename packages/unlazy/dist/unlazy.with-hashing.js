@@ -25,39 +25,40 @@ function _t(t) {
       const { width: s } = t.getBoundingClientRect();
       s > 0 && (r.disconnect(), n());
     });
+    r.observe(t);
   });
 }
 function Lt(t) {
-  let { PI: e, min: n, max: r, cos: s, round: c } = Math, f = t[0] | t[1] << 8 | t[2] << 16, o = t[3] | t[4] << 8, a = (f & 63) / 63, p = (f >> 6 & 63) / 31.5 - 1, d = (f >> 12 & 63) / 31.5 - 1, u = (f >> 18 & 31) / 31, l = f >> 23, b = (o >> 3 & 63) / 63, v = (o >> 9 & 63) / 63, L = o >> 15, B = r(3, L ? l ? 5 : 7 : o & 7), y = r(3, L ? o & 7 : l ? 5 : 7), C = l ? (t[5] & 15) / 15 : 1, O = (t[5] >> 4) / 15, F = l ? 6 : 5, x = 0, _ = (g, w, I) => {
-    let P = [];
+  let { PI: e, min: n, max: r, cos: s, round: c } = Math, f = t[0] | t[1] << 8 | t[2] << 16, o = t[3] | t[4] << 8, a = (f & 63) / 63, p = (f >> 6 & 63) / 31.5 - 1, d = (f >> 12 & 63) / 31.5 - 1, u = (f >> 18 & 31) / 31, l = f >> 23, b = (o >> 3 & 63) / 63, R = (o >> 9 & 63) / 63, L = o >> 15, v = r(3, L ? l ? 5 : 7 : o & 7), y = r(3, L ? o & 7 : l ? 5 : 7), C = l ? (t[5] & 15) / 15 : 1, O = (t[5] >> 4) / 15, F = l ? 6 : 5, x = 0, _ = (g, w, I) => {
+    let B = [];
     for (let S = 0; S < w; S++)
-      for (let R = S ? 0 : 1; R * w < g * (w - S); R++)
-        P.push(((t[F + (x >> 1)] >> ((x++ & 1) << 2) & 15) / 7.5 - 1) * I);
-    return P;
-  }, h = _(B, y, u), k = _(3, 3, b * 1.25), M = _(3, 3, v * 1.25), z = l && _(5, 5, O), q = Ct(t), m = c(q > 1 ? 32 : 32 * q), W = c(q > 1 ? 32 / q : 32), D = new Uint8Array(m * W * 4), j = [], G = [];
-  for (let g = 0, w = 0; g < W; g++)
-    for (let I = 0; I < m; I++, w += 4) {
-      let P = a, S = p, R = d, J = C;
-      for (let i = 0, A = r(B, l ? 5 : 3); i < A; i++)
-        j[i] = s(e / m * (I + 0.5) * i);
+      for (let P = S ? 0 : 1; P * w < g * (w - S); P++)
+        B.push(((t[F + (x >> 1)] >> ((x++ & 1) << 2) & 15) / 7.5 - 1) * I);
+    return B;
+  }, h = _(v, y, u), k = _(3, 3, b * 1.25), M = _(3, 3, R * 1.25), z = l && _(5, 5, O), q = Ct(t), W = c(q > 1 ? 32 : 32 * q), m = c(q > 1 ? 32 / q : 32), D = new Uint8Array(W * m * 4), j = [], G = [];
+  for (let g = 0, w = 0; g < m; g++)
+    for (let I = 0; I < W; I++, w += 4) {
+      let B = a, S = p, P = d, J = C;
+      for (let i = 0, A = r(v, l ? 5 : 3); i < A; i++)
+        j[i] = s(e / W * (I + 0.5) * i);
       for (let i = 0, A = r(y, l ? 5 : 3); i < A; i++)
-        G[i] = s(e / W * (g + 0.5) * i);
+        G[i] = s(e / m * (g + 0.5) * i);
       for (let i = 0, A = 0; i < y; i++)
-        for (let E = i ? 0 : 1, T = G[i] * 2; E * y < B * (y - i); E++, A++)
-          P += h[A] * j[E] * T;
+        for (let E = i ? 0 : 1, T = G[i] * 2; E * y < v * (y - i); E++, A++)
+          B += h[A] * j[E] * T;
       for (let i = 0, A = 0; i < 3; i++)
         for (let E = i ? 0 : 1, T = G[i] * 2; E < 3 - i; E++, A++) {
           let et = j[E] * T;
-          S += k[A] * et, R += M[A] * et;
+          S += k[A] * et, P += M[A] * et;
         }
       if (l)
         for (let i = 0, A = 0; i < 5; i++)
           for (let E = i ? 0 : 1, T = G[i] * 2; E < 5 - i; E++, A++)
             J += z[A] * j[E] * T;
-      let K = P - 2 / 3 * S, tt = (3 * P - K + R) / 2, At = tt - R;
+      let K = B - 2 / 3 * S, tt = (3 * B - K + P) / 2, At = tt - P;
       D[w] = r(0, 255 * n(1, tt)), D[w + 1] = r(0, 255 * n(1, At)), D[w + 2] = r(0, 255 * n(1, K)), D[w + 3] = r(0, 255 * n(1, J));
     }
-  return { w: m, h: W, rgba: D };
+  return { w: W, h: m, rgba: D };
 }
 function Ct(t) {
   let e = t[3], n = t[2] & 128, r = t[4] & 128, s = r ? n ? 5 : 7 : e & 7, c = r ? e & 7 : n ? 5 : 7;
@@ -182,39 +183,39 @@ const zt = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#$%*+,
   for (; e < n; )
     r *= 83, r += zt.indexOf(t[e++]);
   return r;
-}, at = Math.pow, U = Math.PI, St = U * 2, lt = 3294.6, it = 269.025, Bt = (t) => t > 10.31475 ? at(t / it + 0.052132, 2.4) : t / lt, Y = (t) => ~~(t > 1227e-8 ? it * at(t, 0.416666) - 13.025 : t * lt + 1), H = (t) => (t < 0 ? -1 : 1) * t * t, rt = (t) => {
+}, at = Math.pow, U = Math.PI, St = U * 2, lt = 3294.6, it = 269.025, vt = (t) => t > 10.31475 ? at(t / it + 0.052132, 2.4) : t / lt, Y = (t) => ~~(t > 1227e-8 ? it * at(t, 0.416666) - 13.025 : t * lt + 1), H = (t) => (t < 0 ? -1 : 1) * t * t, rt = (t) => {
   for (t += U / 2; t > U; )
     t -= St;
   const e = 1.27323954 * t - 0.405284735 * H(t);
   return 0.225 * (H(e) - e) + e;
 };
-function Pt(t) {
+function Bt(t) {
   const e = N(t, 2, 6);
   return [e >> 16, e >> 8 & 255, e & 255];
 }
-function Rt(t, e, n, r) {
+function Pt(t, e, n, r) {
   const s = N(t, 0, 1), c = s % 9 + 1, f = ~~(s / 9) + 1, o = c * f;
-  let a = 0, p = 0, d = 0, u = 0, l = 0, b = 0, v = 0, L = 0, B = 0, y = 0, C = 0, O = 0, F = 0, x = 0;
-  const _ = (N(t, 1, 2) + 1) / 13446 * (r | 1), h = new Float64Array(o * 3), k = Pt(t);
+  let a = 0, p = 0, d = 0, u = 0, l = 0, b = 0, R = 0, L = 0, v = 0, y = 0, C = 0, O = 0, F = 0, x = 0;
+  const _ = (N(t, 1, 2) + 1) / 13446 * (r | 1), h = new Float64Array(o * 3), k = Bt(t);
   for (a = 0; a < 3; a++)
-    h[a] = Bt(k[a]);
+    h[a] = vt(k[a]);
   for (a = 1; a < o; a++)
     x = N(t, 4 + a * 2, 6 + a * 2), h[a * 3] = H(~~(x / (19 * 19)) - 9) * _, h[a * 3 + 1] = H(~~(x / 19) % 19 - 9) * _, h[a * 3 + 2] = H(x % 19 - 9) * _;
   const M = e * 4, z = new Uint8ClampedArray(M * n);
   for (u = 0; u < n; u++)
     for (O = U * u / n, d = 0; d < e; d++) {
-      for (l = 0, b = 0, v = 0, F = U * d / e, p = 0; p < f; p++)
-        for (B = rt(O * p), a = 0; a < c; a++)
-          L = rt(F * a) * B, y = (a + p * c) * 3, l += h[y] * L, b += h[y + 1] * L, v += h[y + 2] * L;
-      C = 4 * d + u * M, z[C] = Y(l), z[C + 1] = Y(b), z[C + 2] = Y(v), z[C + 3] = 255;
+      for (l = 0, b = 0, R = 0, F = U * d / e, p = 0; p < f; p++)
+        for (v = rt(O * p), a = 0; a < c; a++)
+          L = rt(F * a) * v, y = (a + p * c) * 3, l += h[y] * L, b += h[y + 1] * L, R += h[y + 2] * L;
+      C = 4 * d + u * M, z[C] = Y(l), z[C + 1] = Y(b), z[C + 2] = Y(R), z[C + 3] = 255;
     }
   return z;
 }
-function vt(t, {
+function Rt(t, {
   ratio: e = 1,
   size: n = 32
 } = {}) {
-  const { width: r, height: s } = yt(e, n), c = Rt(t, r, s);
+  const { width: r, height: s } = yt(e, n), c = Pt(t, r, s);
   return ct(r, s, c);
 }
 function ft(t = 'img[loading="lazy"]', {
@@ -297,7 +298,7 @@ function gt({
         const c = t.width || t.offsetWidth || r, f = t.height || t.offsetHeight || r;
         s = c / f;
       }
-      return vt(e, { ratio: s, size: r });
+      return Rt(e, { ratio: s, size: r });
     } catch (c) {
       console.error(`Error generating ${n} placeholder:`, c);
     }
