@@ -72,5 +72,7 @@ export function waitForElementDimensions<T extends HTMLElement>(element: T): Pro
         resolve()
       }
     });
+
+    observer.observe(element);
   });
 }
