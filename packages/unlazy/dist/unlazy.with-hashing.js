@@ -1,16 +1,16 @@
-const pt = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", ot = typeof window > "u", _t = !ot && "loading" in HTMLImageElement.prototype, bt = !ot && (!("onscroll" in window) || /(gle|ing|ro)bot|crawl|spider/i.test(navigator.userAgent));
-function st(t, e = document) {
+const At = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", rt = typeof window > "u", pt = !rt && "loading" in HTMLImageElement.prototype, _t = !rt && (!("onscroll" in window) || /(gle|ing|ro)bot|crawl|spider/i.test(navigator.userAgent));
+function nt(t, e = document) {
   return typeof t == "string" ? [...e.querySelectorAll(t)] : t instanceof Element ? [t] : [...t];
 }
-function yt(t, e) {
+function bt(t, e) {
   let n, r;
   return t >= 1 ? (n = e, r = Math.round(e / t)) : (n = Math.round(e * t), r = e), { width: n, height: r };
 }
-function Et(t) {
+function yt(t) {
   const e = t.replace(/-/g, "+").replace(/_/g, "/"), n = typeof Buffer < "u" ? Buffer.from(e, "base64") : Uint8Array.from(atob(e), (r) => r.charCodeAt(0));
   return new Uint8Array(n);
 }
-function gt(t, e) {
+function Et(t, e) {
   let n;
   return function(...r) {
     n && clearTimeout(n), n = setTimeout(() => {
@@ -19,38 +19,38 @@ function gt(t, e) {
   };
 }
 function ht(t) {
-  let { PI: e, min: n, max: r, cos: c, round: s } = Math, f = t[0] | t[1] << 8 | t[2] << 16, o = t[3] | t[4] << 8, a = (f & 63) / 63, _ = (f >> 6 & 63) / 31.5 - 1, d = (f >> 12 & 63) / 31.5 - 1, u = (f >> 18 & 31) / 31, i = f >> 23, p = (o >> 3 & 63) / 63, B = (o >> 9 & 63) / 63, L = o >> 15, I = r(3, L ? i ? 5 : 7 : o & 7), y = r(3, L ? o & 7 : i ? 5 : 7), w = i ? (t[5] & 15) / 15 : 1, O = (t[5] >> 4) / 15, T = i ? 6 : 5, m = 0, h = (U, g, D) => {
-    let S = [];
-    for (let C = 0; C < g; C++)
-      for (let z = C ? 0 : 1; z * g < U * (g - C); z++)
-        S.push(((t[T + (m >> 1)] >> ((m++ & 1) << 2) & 15) / 7.5 - 1) * D);
-    return S;
-  }, E = h(I, y, u), $ = h(3, 3, p * 1.25), H = h(3, 3, B * 1.25), x = i && h(5, 5, O), N = Lt(t), M = s(N > 1 ? 32 : 32 * N), W = s(N > 1 ? 32 / N : 32), G = new Uint8Array(M * W * 4), F = [], q = [];
-  for (let U = 0, g = 0; U < W; U++)
-    for (let D = 0; D < M; D++, g += 4) {
-      let S = a, C = _, z = d, J = w;
-      for (let l = 0, A = r(I, i ? 5 : 3); l < A; l++)
-        F[l] = c(e / M * (D + 0.5) * l);
+  let { PI: e, min: n, max: r, cos: c, round: s } = Math, f = t[0] | t[1] << 8 | t[2] << 16, o = t[3] | t[4] << 8, a = (f & 63) / 63, _ = (f >> 6 & 63) / 31.5 - 1, d = (f >> 12 & 63) / 31.5 - 1, u = (f >> 18 & 31) / 31, i = f >> 23, p = (o >> 3 & 63) / 63, B = (o >> 9 & 63) / 63, L = o >> 15, S = r(3, L ? i ? 5 : 7 : o & 7), y = r(3, L ? o & 7 : i ? 5 : 7), w = i ? (t[5] & 15) / 15 : 1, T = (t[5] >> 4) / 15, H = i ? 6 : 5, m = 0, g = (U, h, D) => {
+    let z = [];
+    for (let C = 0; C < h; C++)
+      for (let I = C ? 0 : 1; I * h < U * (h - C); I++)
+        z.push(((t[H + (m >> 1)] >> ((m++ & 1) << 2) & 15) / 7.5 - 1) * D);
+    return z;
+  }, E = g(S, y, u), k = g(3, 3, p * 1.25), N = g(3, 3, B * 1.25), x = i && g(5, 5, T), M = gt(t), W = s(M > 1 ? 32 : 32 * M), F = s(M > 1 ? 32 / M : 32), G = new Uint8Array(W * F * 4), q = [], Z = [];
+  for (let U = 0, h = 0; U < F; U++)
+    for (let D = 0; D < W; D++, h += 4) {
+      let z = a, C = _, I = d, V = w;
+      for (let l = 0, A = r(S, i ? 5 : 3); l < A; l++)
+        q[l] = c(e / W * (D + 0.5) * l);
       for (let l = 0, A = r(y, i ? 5 : 3); l < A; l++)
-        q[l] = c(e / W * (U + 0.5) * l);
+        Z[l] = c(e / F * (U + 0.5) * l);
       for (let l = 0, A = 0; l < y; l++)
-        for (let b = l ? 0 : 1, P = q[l] * 2; b * y < I * (y - l); b++, A++)
-          S += E[A] * F[b] * P;
+        for (let b = l ? 0 : 1, P = Z[l] * 2; b * y < S * (y - l); b++, A++)
+          z += E[A] * q[b] * P;
       for (let l = 0, A = 0; l < 3; l++)
-        for (let b = l ? 0 : 1, P = q[l] * 2; b < 3 - l; b++, A++) {
-          let et = F[b] * P;
-          C += $[A] * et, z += H[A] * et;
+        for (let b = l ? 0 : 1, P = Z[l] * 2; b < 3 - l; b++, A++) {
+          let K = q[b] * P;
+          C += k[A] * K, I += N[A] * K;
         }
       if (i)
         for (let l = 0, A = 0; l < 5; l++)
-          for (let b = l ? 0 : 1, P = q[l] * 2; b < 5 - l; b++, A++)
-            J += x[A] * F[b] * P;
-      let K = S - 2 / 3 * C, tt = (3 * S - K + z) / 2, At = tt - z;
-      G[g] = r(0, 255 * n(1, tt)), G[g + 1] = r(0, 255 * n(1, At)), G[g + 2] = r(0, 255 * n(1, K)), G[g + 3] = r(0, 255 * n(1, J));
+          for (let b = l ? 0 : 1, P = Z[l] * 2; b < 5 - l; b++, A++)
+            V += x[A] * q[b] * P;
+      let X = z - 2 / 3 * C, J = (3 * z - X + I) / 2, dt = J - I;
+      G[h] = r(0, 255 * n(1, J)), G[h + 1] = r(0, 255 * n(1, dt)), G[h + 2] = r(0, 255 * n(1, X)), G[h + 3] = r(0, 255 * n(1, V));
     }
-  return { w: M, h: W, rgba: G };
+  return { w: W, h: F, rgba: G };
 }
-function Lt(t) {
+function gt(t) {
   let e = t[3], n = t[2] & 128, r = t[4] & 128, c = r ? n ? 5 : 7 : e & 7, s = r ? e & 7 : n ? 5 : 7;
   return c / s;
 }
@@ -65,7 +65,7 @@ function Lt(t) {
  * @author Evan Wallace
  * @license MIT
  */
-function ct(t, e, n) {
+function ot(t, e, n) {
   const r = t * 4 + 1, c = 6 + e * (5 + r), s = [
     137,
     80,
@@ -164,40 +164,40 @@ function ct(t, e, n) {
   }
   return `data:image/png;base64,${typeof Buffer < "u" ? Buffer.from(new Uint8Array(s)).toString("base64") : btoa(String.fromCharCode(...s))}`;
 }
-function wt(t) {
-  const { w: e, h: n, rgba: r } = ht(Et(t));
-  return ct(e, n, r);
+function Lt(t) {
+  const { w: e, h: n, rgba: r } = ht(yt(t));
+  return ot(e, n, r);
 }
-const mt = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#$%*+,-.:;=?@[]^_{|}~", Y = (t, e, n) => {
+const wt = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz#$%*+,-.:;=?@[]^_{|}~", j = (t, e, n) => {
   let r = 0;
   for (; e < n; )
-    r *= 83, r += mt.indexOf(t[e++]);
+    r *= 83, r += wt.indexOf(t[e++]);
   return r;
-}, at = Math.pow, v = Math.PI, xt = v * 2, it = 3294.6, lt = 269.025, Ct = (t) => t > 10.31475 ? at(t / lt + 0.052132, 2.4) : t / it, k = (t) => ~~(t > 1227e-8 ? lt * at(t, 0.416666) - 13.025 : t * it + 1), R = (t) => (t < 0 ? -1 : 1) * t * t, rt = (t) => {
+}, st = Math.pow, v = Math.PI, mt = v * 2, ct = 3294.6, at = 269.025, xt = (t) => t > 10.31475 ? st(t / at + 0.052132, 2.4) : t / ct, Q = (t) => ~~(t > 1227e-8 ? at * st(t, 0.416666) - 13.025 : t * ct + 1), R = (t) => (t < 0 ? -1 : 1) * t * t, tt = (t) => {
   for (t += v / 2; t > v; )
-    t -= xt;
+    t -= mt;
   const e = 1.27323954 * t - 0.405284735 * R(t);
   return 0.225 * (R(e) - e) + e;
 };
-function It(t) {
-  const e = Y(t, 2, 6);
+function Ct(t) {
+  const e = j(t, 2, 6);
   return [e >> 16, e >> 8 & 255, e & 255];
 }
 function St(t, e, n, r) {
-  const c = Y(t, 0, 1), s = c % 9 + 1, f = ~~(c / 9) + 1, o = s * f;
-  let a = 0, _ = 0, d = 0, u = 0, i = 0, p = 0, B = 0, L = 0, I = 0, y = 0, w = 0, O = 0, T = 0, m = 0;
-  const h = (Y(t, 1, 2) + 1) / 13446 * (r | 1), E = new Float64Array(o * 3), $ = It(t);
+  const c = j(t, 0, 1), s = c % 9 + 1, f = ~~(c / 9) + 1, o = s * f;
+  let a = 0, _ = 0, d = 0, u = 0, i = 0, p = 0, B = 0, L = 0, S = 0, y = 0, w = 0, T = 0, H = 0, m = 0;
+  const g = (j(t, 1, 2) + 1) / 13446 * (r | 1), E = new Float64Array(o * 3), k = Ct(t);
   for (a = 0; a < 3; a++)
-    E[a] = Ct($[a]);
+    E[a] = xt(k[a]);
   for (a = 1; a < o; a++)
-    m = Y(t, 4 + a * 2, 6 + a * 2), E[a * 3] = R(~~(m / (19 * 19)) - 9) * h, E[a * 3 + 1] = R(~~(m / 19) % 19 - 9) * h, E[a * 3 + 2] = R(m % 19 - 9) * h;
-  const H = e * 4, x = new Uint8ClampedArray(H * n);
+    m = j(t, 4 + a * 2, 6 + a * 2), E[a * 3] = R(~~(m / (19 * 19)) - 9) * g, E[a * 3 + 1] = R(~~(m / 19) % 19 - 9) * g, E[a * 3 + 2] = R(m % 19 - 9) * g;
+  const N = e * 4, x = new Uint8ClampedArray(N * n);
   for (u = 0; u < n; u++)
-    for (O = v * u / n, d = 0; d < e; d++) {
-      for (i = 0, p = 0, B = 0, T = v * d / e, _ = 0; _ < f; _++)
-        for (I = rt(O * _), a = 0; a < s; a++)
-          L = rt(T * a) * I, y = (a + _ * s) * 3, i += E[y] * L, p += E[y + 1] * L, B += E[y + 2] * L;
-      w = 4 * d + u * H, x[w] = k(i), x[w + 1] = k(p), x[w + 2] = k(B), x[w + 3] = 255;
+    for (T = v * u / n, d = 0; d < e; d++) {
+      for (i = 0, p = 0, B = 0, H = v * d / e, _ = 0; _ < f; _++)
+        for (S = tt(T * _), a = 0; a < s; a++)
+          L = tt(H * a) * S, y = (a + _ * s) * 3, i += E[y] * L, p += E[y + 1] * L, B += E[y + 2] * L;
+      w = 4 * d + u * N, x[w] = Q(i), x[w + 1] = Q(p), x[w + 2] = Q(B), x[w + 3] = 255;
     }
   return x;
 }
@@ -205,10 +205,10 @@ function zt(t, {
   ratio: e = 1,
   size: n = 32
 } = {}) {
-  const { width: r, height: c } = yt(e, n), s = St(t, r, c);
-  return ct(r, c, s);
+  const { width: r, height: c } = bt(e, n), s = St(t, r, c);
+  return ot(r, c, s);
 }
-function ft(t = 'img[loading="lazy"]', {
+function it(t = 'img[loading="lazy"]', {
   hash: e = !0,
   hashType: n = "blurhash",
   placeholderSize: r = 32,
@@ -216,11 +216,11 @@ function ft(t = 'img[loading="lazy"]', {
   onImageLoad: s
 } = {}) {
   const f = /* @__PURE__ */ new Set();
-  for (const o of st(t)) {
-    const a = j(o, { updateOnResize: c });
+  for (const o of nt(t)) {
+    const a = O(o, { updateOnResize: c });
     if (c && a && f.add(a), // @ts-expect-error: Compile-time flag
     e) {
-      const d = Gt({
+      const d = Bt({
         image: o,
         hash: typeof e == "string" ? e : void 0,
         hashType: n,
@@ -232,20 +232,20 @@ function ft(t = 'img[loading="lazy"]', {
       (typeof __UNLAZY_LOGGING__ > "u" || __UNLAZY_LOGGING__) && console.error("[unlazy] Missing `data-src` or `data-srcset` attribute", o);
       continue;
     }
-    if (bt || !_t) {
-      ut(o), X(o), V(o);
+    if (_t || !pt) {
+      $(o, s);
       continue;
     }
-    if (o.src || (o.src = pt), console.log(1699882775467, "image already in viewport", {
+    if (o.src || (o.src = At), console.log(1699882775467, "image already in viewport", {
       image: o,
       complete: o.complete,
       naturalWidth: o.naturalWidth,
       boundingWidth: o.getBoundingClientRect().width
     }), o.complete && o.naturalWidth > 0) {
-      console.log(1699883770722, "load image directly", o), Q(o, s);
+      console.log(1699883770722, "load image directly", o), $(o, s);
       continue;
     }
-    const _ = () => Q(o, s);
+    const _ = () => $(o, s);
     o.addEventListener("load", _, { once: !0 }), f.add(
       () => o.removeEventListener("load", _)
     );
@@ -256,22 +256,22 @@ function ft(t = 'img[loading="lazy"]', {
     f.clear();
   };
 }
-function Bt(t = 'img[data-sizes="auto"], source[data-sizes="auto"]') {
-  for (const e of st(t))
-    j(e);
+function It(t = 'img[data-sizes="auto"], source[data-sizes="auto"]') {
+  for (const e of nt(t))
+    O(e);
 }
-function Q(t, e) {
+function $(t, e) {
   const n = new Image(), { srcset: r, src: c, sizes: s } = t.dataset;
   if (s === "auto") {
-    const f = dt(t);
+    const f = ut(t);
     f && (n.sizes = `${f}px`);
   } else
     t.sizes && (n.sizes = t.sizes);
   r && (n.srcset = r), c && (n.src = c), n.addEventListener("load", () => {
-    ut(t), X(t), V(t), e == null || e(t);
+    O(t), Gt(t), ft(t), lt(t), e == null || e(t);
   });
 }
-function Gt({
+function Bt({
   /** If given, the hash will be extracted from the image's `data-blurhash` or `data-thumbhash` attribute and ratio will be calculated from the image's actual dimensions */
   image: t,
   hash: e,
@@ -288,7 +288,7 @@ function Gt({
   if (e)
     try {
       if (n === "thumbhash")
-        return wt(e);
+        return Lt(e);
       if (!c && t) {
         const s = t.width || t.offsetWidth || r, f = t.height || t.offsetHeight || r;
         c = s / f;
@@ -298,49 +298,49 @@ function Gt({
       (typeof __UNLAZY_LOGGING__ > "u" || __UNLAZY_LOGGING__) && console.error(`Error generating ${n} placeholder:`, s);
     }
 }
-const Z = /* @__PURE__ */ new WeakMap();
-function j(t, e) {
+const Y = /* @__PURE__ */ new WeakMap();
+function O(t, e) {
   var r;
   if (t.dataset.sizes !== "auto")
     return;
-  const n = dt(t);
+  const n = ut(t);
   if (n && (t.sizes = `${n}px`), ((r = t.parentElement) == null ? void 0 : r.tagName.toLowerCase()) === "picture" && !(e != null && e.skipChildren) && [...t.parentElement.getElementsByTagName("source")].forEach(
-    (c) => j(c, { skipChildren: !0 })
+    (c) => O(c, { skipChildren: !0 })
   ), e != null && e.updateOnResize) {
-    if (!Z.has(t)) {
-      const c = gt(() => j(t), 500), s = new ResizeObserver(c);
-      Z.set(t, s), s.observe(t);
+    if (!Y.has(t)) {
+      const c = Et(() => O(t), 500), s = new ResizeObserver(c);
+      Y.set(t, s), s.observe(t);
     }
     return () => {
-      const c = Z.get(t);
-      c && (c.disconnect(), Z.delete(t));
+      const c = Y.get(t);
+      c && (c.disconnect(), Y.delete(t));
     };
   }
 }
-function V(t) {
+function lt(t) {
   t.dataset.src && (t.src = t.dataset.src, t.removeAttribute("data-src"));
 }
-function X(t) {
+function ft(t) {
   t.dataset.srcset && (t.srcset = t.dataset.srcset, t.removeAttribute("data-srcset"));
 }
-function ut(t) {
+function Gt(t) {
   const e = t.parentElement;
-  (e == null ? void 0 : e.tagName.toLowerCase()) === "picture" && ([...e.querySelectorAll("source[data-srcset]")].forEach(X), [...e.querySelectorAll("source[data-src]")].forEach(V));
+  (e == null ? void 0 : e.tagName.toLowerCase()) === "picture" && ([...e.querySelectorAll("source[data-srcset]")].forEach(ft), [...e.querySelectorAll("source[data-src]")].forEach(lt));
 }
-function dt(t) {
+function ut(t) {
   var e, n;
   return t instanceof HTMLSourceElement ? (n = (e = t.parentElement) == null ? void 0 : e.getElementsByTagName("img")[0]) == null ? void 0 : n.offsetWidth : t.offsetWidth;
 }
 const Ut = Object.freeze({
-  autoSizes: Bt,
-  lazyLoad: ft,
-  loadImage: Q
+  autoSizes: It,
+  lazyLoad: it,
+  loadImage: $
 });
-var nt;
-(nt = document.currentScript) != null && nt.hasAttribute("init") && ft();
+var et;
+(et = document.currentScript) != null && et.hasAttribute("init") && it();
 export {
-  Bt as autoSizes,
+  It as autoSizes,
   Ut as default,
-  ft as lazyLoad,
-  Q as loadImage
+  it as lazyLoad,
+  $ as loadImage
 };

@@ -35,9 +35,7 @@ function lazyLoad(selectorsOrElements = 'img[loading="lazy"]', {
       continue;
     }
     if (png.isCrawler || !png.isLazyLoadingSupported) {
-      updatePictureSources(image);
-      updateImageSrcset(image);
-      updateImageSrc(image);
+      loadImage(image, onImageLoad);
       continue;
     }
     if (!image.src)
@@ -84,6 +82,7 @@ function loadImage(image, onImageLoad) {
   if (src)
     imagePreLoader.src = src;
   imagePreLoader.addEventListener("load", () => {
+    updateSizesAttribute(image);
     updatePictureSources(image);
     updateImageSrcset(image);
     updateImageSrc(image);
