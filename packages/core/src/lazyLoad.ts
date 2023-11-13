@@ -23,7 +23,7 @@ export function lazyLoad<T extends HTMLImageElement>(
   toElementArray<T>(selectorsOrElements).map(async (image) => {
     // wait till an image has dimensions
     // an image without dimensions is possible, if it is hidden by css
-    await waitForElementDimensions(image)
+    // await waitForElementDimensions(image)
 
     // Calculate the image's `sizes` attribute if `data-sizes="auto"` is set
     const onResizeCleanup = updateSizesAttribute(image, { updateOnResize: updateSizesOnResize })
@@ -67,6 +67,11 @@ export function lazyLoad<T extends HTMLImageElement>(
 
     // Load the image if it's already in the viewport
     if (image.complete && image.naturalWidth > 0) {
+      console.log(1699882775467, 'image already in viewport', {
+        complete: image.complete,
+        naturalWidth: image.naturalWidth,
+        boundingWidth: image.getBoundingClientRect().width,
+      });
       loadImage(image, onImageLoad)
       return
     }

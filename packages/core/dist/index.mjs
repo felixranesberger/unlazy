@@ -1,6 +1,6 @@
 import { D as DEFAULT_IMAGE_PLACEHOLDER, a as DEFAULT_PLACEHOLDER_SIZE, c as createPngDataUri$1 } from './shared/core.497408d4.mjs';
-import { t as toElementArray, w as waitForElementDimensions, i as isCrawler, a as isLazyLoadingSupported, d as debounce } from './shared/core.9aa6e28c.mjs';
-export { c as base64ToBytes, g as getScaledDimensions, b as isSSR } from './shared/core.9aa6e28c.mjs';
+import { t as toElementArray, i as isCrawler, a as isLazyLoadingSupported, d as debounce } from './shared/core.9aa6e28c.mjs';
+export { c as base64ToBytes, g as getScaledDimensions, b as isSSR, w as waitForElementDimensions } from './shared/core.9aa6e28c.mjs';
 import { createPngDataUri } from './thumbhash.mjs';
 
 function lazyLoad(selectorsOrElements = 'img[loading="lazy"]', {
@@ -12,7 +12,6 @@ function lazyLoad(selectorsOrElements = 'img[loading="lazy"]', {
 } = {}) {
   const cleanupFns = /* @__PURE__ */ new Set();
   toElementArray(selectorsOrElements).map(async (image) => {
-    await waitForElementDimensions(image);
     const onResizeCleanup = updateSizesAttribute(image, { updateOnResize: updateSizesOnResize });
     if (updateSizesOnResize && onResizeCleanup)
       cleanupFns.add(onResizeCleanup);
@@ -42,6 +41,11 @@ function lazyLoad(selectorsOrElements = 'img[loading="lazy"]', {
     if (!image.src)
       image.src = DEFAULT_IMAGE_PLACEHOLDER;
     if (image.complete && image.naturalWidth > 0) {
+      console.log(1699882775467, "image already in viewport", {
+        complete: image.complete,
+        naturalWidth: image.naturalWidth,
+        boundingWidth: image.getBoundingClientRect().width
+      });
       loadImage(image, onImageLoad);
       return;
     }
@@ -165,4 +169,4 @@ function getOffsetWidth(element) {
   return element instanceof HTMLSourceElement ? element.parentElement?.getElementsByTagName("img")[0]?.offsetWidth : element.offsetWidth;
 }
 
-export { autoSizes, createPlaceholderFromHash, debounce, isCrawler, isLazyLoadingSupported, lazyLoad, loadImage, toElementArray, waitForElementDimensions };
+export { autoSizes, createPlaceholderFromHash, debounce, isCrawler, isLazyLoadingSupported, lazyLoad, loadImage, toElementArray };
