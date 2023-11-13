@@ -53,9 +53,7 @@ export function lazyLoad<T extends HTMLImageElement>(
 
     // Use the same logic as for crawlers when native lazy-loading is not supported
     if (isCrawler || !isLazyLoadingSupported) {
-      updatePictureSources(image)
-      updateImageSrcset(image)
-      updateImageSrc(image)
+      loadImage(image, onImageLoad)
       continue
     }
 
@@ -127,6 +125,8 @@ export function loadImage(
     imagePreLoader.src = src
 
   imagePreLoader.addEventListener('load', () => {
+    // make sure that sizes attribute isset when srcset is injected
+    updateSizesAttribute(image)
     updatePictureSources(image)
     updateImageSrcset(image)
     updateImageSrc(image)
