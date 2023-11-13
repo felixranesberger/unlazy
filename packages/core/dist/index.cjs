@@ -41,7 +41,14 @@ function lazyLoad(selectorsOrElements = 'img[loading="lazy"]', {
     }
     if (!image.src)
       image.src = blurhash.DEFAULT_IMAGE_PLACEHOLDER;
+    console.log(1699882775467, "image already in viewport", {
+      image,
+      complete: image.complete,
+      naturalWidth: image.naturalWidth,
+      boundingWidth: image.getBoundingClientRect().width
+    });
     if (image.complete && image.naturalWidth > 0) {
+      console.log(1699883770722, "load image directly", image);
       loadImage(image, onImageLoad);
       continue;
     }
