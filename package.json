@@ -14,8 +14,7 @@
     "lint:fix": "eslint . --fix && pnpm -r --filter=./packages/** run lint:fix",
     "test": "pnpm -r test:run",
     "test:types": "pnpm -r test:types",
-    "release": "bumpp -r",
-    "prepare": "pnpm run dev:prepare"
+    "release": "bumpp -r"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^1.1.0",
