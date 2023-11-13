@@ -11,7 +11,7 @@ function lazyLoad(selectorsOrElements = 'img[loading="lazy"]', {
   onImageLoad
 } = {}) {
   const cleanupFns = /* @__PURE__ */ new Set();
-  toElementArray(selectorsOrElements).map(async (image) => {
+  for (const image of toElementArray(selectorsOrElements)) {
     const onResizeCleanup = updateSizesAttribute(image, { updateOnResize: updateSizesOnResize });
     if (updateSizesOnResize && onResizeCleanup)
       cleanupFns.add(onResizeCleanup);
@@ -30,32 +30,26 @@ function lazyLoad(selectorsOrElements = 'img[loading="lazy"]', {
     }
     if (!image.dataset.src && !image.dataset.srcset) {
       console.error("[unlazy] Missing `data-src` or `data-srcset` attribute", image);
-      return;
+      continue;
     }
     if (isCrawler || !isLazyLoadingSupported) {
       updatePictureSources(image);
       updateImageSrcset(image);
       updateImageSrc(image);
-      return;
+      continue;
     }
     if (!image.src)
       image.src = DEFAULT_IMAGE_PLACEHOLDER;
     if (image.complete && image.naturalWidth > 0) {
-      console.log(1699882775467, "image already in viewport", {
-        image,
-        complete: image.complete,
-        naturalWidth: image.naturalWidth,
-        boundingWidth: image.getBoundingClientRect().width
-      });
       loadImage(image, onImageLoad);
-      return;
+      continue;
     }
     const loadHandler = () => loadImage(image, onImageLoad);
     image.addEventListener("load", loadHandler, { once: true });
     cleanupFns.add(
       () => image.removeEventListener("load", loadHandler)
     );
-  });
+  }
   return () => {
     for (const fn of cleanupFns)
       fn();
@@ -126,9 +120,9 @@ function updateSizesAttribute(element, options) {
   const width = getOffsetWidth(element);
   if (width)
     element.sizes = `${width}px`;
-  if (element.parentElement?.tagName.toLowerCase() === "picture" && !options?.skipChildren) {
+  if (element.parentElement?.tagName.toLowerCase() === "picture" && !options?.isRecursiveCall) {
     [...element.parentElement.getElementsByTagName("source")].forEach(
-      (sourceTag) => updateSizesAttribute(sourceTag, { skipChildren: true })
+      (sourceTag) => updateSizesAttribute(sourceTag, { isRecursiveCall: true })
     );
   }
   if (options?.updateOnResize) {

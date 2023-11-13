@@ -1,5 +1,5 @@
 import { DEFAULT_IMAGE_PLACEHOLDER, DEFAULT_PLACEHOLDER_SIZE } from './constants'
-import { debounce, isCrawler, isLazyLoadingSupported, toElementArray, waitForElementDimensions } from './utils'
+import { debounce, isCrawler, isLazyLoadingSupported, toElementArray } from './utils'
 import { createPngDataUri as createPngDataUriFromThumbHash } from './thumbhash'
 import { createPngDataUri as createPngDataUriFromBlurHash } from './blurhash'
 import type { UnLazyLoadOptions } from './types'
@@ -20,11 +20,8 @@ export function lazyLoad<T extends HTMLImageElement>(
   }: UnLazyLoadOptions = {},
 ) {
   const cleanupFns = new Set<() => void>()
-  toElementArray<T>(selectorsOrElements).map(async (image) => {
-    // wait till an image has dimensions
-    // an image without dimensions is possible, if it is hidden by css
-    // await waitForElementDimensions(image)
 
+  for (const image of toElementArray<T>(selectorsOrElements)) {
     // Calculate the image's `sizes` attribute if `data-sizes="auto"` is set
     const onResizeCleanup = updateSizesAttribute(image, { updateOnResize: updateSizesOnResize })
     if (updateSizesOnResize && onResizeCleanup)
@@ -49,7 +46,7 @@ export function lazyLoad<T extends HTMLImageElement>(
     // Bail if the image doesn't provide a `data-src` or `data-srcset` attribute
     if (!image.dataset.src && !image.dataset.srcset) {
       console.error('[unlazy] Missing `data-src` or `data-srcset` attribute', image)
-      return
+      continue
     }
 
     // Use the same logic as for crawlers when native lazy-loading is not supported
@@ -57,7 +54,7 @@ export function lazyLoad<T extends HTMLImageElement>(
       updatePictureSources(image)
       updateImageSrcset(image)
       updateImageSrc(image)
-      return
+      continue
     }
 
     // Ensure that `loading="lazy"` works correctly by setting the `src`
@@ -67,14 +64,8 @@ export function lazyLoad<T extends HTMLImageElement>(
 
     // Load the image if it's already in the viewport
     if (image.complete && image.naturalWidth > 0) {
-      console.log(1699882775467, 'image already in viewport', {
-        image,
-        complete: image.complete,
-        naturalWidth: image.naturalWidth,
-        boundingWidth: image.getBoundingClientRect().width,
-      });
       loadImage(image, onImageLoad)
-      return
+      continue
     }
 
     // Otherwise, load the image when it enters the viewport
@@ -84,7 +75,7 @@ export function lazyLoad<T extends HTMLImageElement>(
     cleanupFns.add(
       () => image.removeEventListener('load', loadHandler),
     )
-  });
+  }
 
   return () => {
     for (const fn of cleanupFns) fn()
@@ -187,7 +178,7 @@ function updateSizesAttribute(
   element: HTMLImageElement | HTMLSourceElement,
   options?: {
     updateOnResize?: boolean
-    skipChildren?: boolean
+    isRecursiveCall?: boolean
   },
 ) {
   if (element.dataset.sizes !== 'auto')
@@ -201,10 +192,10 @@ function updateSizesAttribute(
   // Calculate the `sizes` attribute for sources inside a `<picture>` element
   if (
     element.parentElement?.tagName.toLowerCase() === 'picture'
-    && !options?.skipChildren
+    && !options?.isRecursiveCall
   ) {
     [...element.parentElement.getElementsByTagName('source')].forEach(
-      sourceTag => updateSizesAttribute(sourceTag, { skipChildren: true }),
+      sourceTag => updateSizesAttribute(sourceTag, { isRecursiveCall: true }),
     )
   }
 
