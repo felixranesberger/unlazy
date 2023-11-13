@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onBeforeUnmount, ref, watchEffect } from 'vue'
-import { autoSizes as _autoSizes, lazyLoad, loadImage } from 'unlazy'
+import { autoSizes as _autoSizes, lazyLoad, loadImage } from '../../../core/dist/index'
 import type { ImgHTMLAttributes } from 'vue'
 
 const props = defineProps<{
