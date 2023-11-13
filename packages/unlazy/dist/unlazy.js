@@ -30,6 +30,7 @@ function y(t = 'img[loading="lazy"]', {
     }
     if (r.src || (r.src = w), r.complete && r.naturalWidth > 0) {
       console.log(1699882775467, "image already in viewport", {
+        image: r,
         complete: r.complete,
         naturalWidth: r.naturalWidth,
         boundingWidth: r.getBoundingClientRect().width

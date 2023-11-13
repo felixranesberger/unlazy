@@ -25,26 +25,26 @@ function _t(t) {
       for (let P = z ? 0 : 1; P * w < I * (w - z); P++)
         D.push(((t[M + (C >> 1)] >> ((C++ & 1) << 2) & 15) / 7.5 - 1) * T);
     return D;
-  }, h = _(B, E, u), k = _(3, 3, p * 1.25), W = _(3, 3, R * 1.25), S = l && _(5, 5, O), F = Lt(t), q = s(F > 1 ? 32 : 32 * F), j = s(F > 1 ? 32 / F : 32), v = new Uint8Array(q * j * 4), m = [], G = [];
+  }, h = _(B, E, u), k = _(3, 3, p * 1.25), W = _(3, 3, R * 1.25), S = l && _(5, 5, O), F = Lt(t), q = s(F > 1 ? 32 : 32 * F), j = s(F > 1 ? 32 / F : 32), v = new Uint8Array(q * j * 4), G = [], $ = [];
   for (let I = 0, w = 0; I < j; I++)
     for (let T = 0; T < q; T++, w += 4) {
       let D = a, z = b, P = d, J = x;
       for (let i = 0, A = r(B, l ? 5 : 3); i < A; i++)
-        m[i] = c(e / q * (T + 0.5) * i);
+        G[i] = c(e / q * (T + 0.5) * i);
       for (let i = 0, A = r(E, l ? 5 : 3); i < A; i++)
-        G[i] = c(e / j * (I + 0.5) * i);
+        $[i] = c(e / j * (I + 0.5) * i);
       for (let i = 0, A = 0; i < E; i++)
-        for (let y = i ? 0 : 1, g = G[i] * 2; y * E < B * (E - i); y++, A++)
-          D += h[A] * m[y] * g;
+        for (let y = i ? 0 : 1, g = $[i] * 2; y * E < B * (E - i); y++, A++)
+          D += h[A] * G[y] * g;
       for (let i = 0, A = 0; i < 3; i++)
-        for (let y = i ? 0 : 1, g = G[i] * 2; y < 3 - i; y++, A++) {
-          let et = m[y] * g;
+        for (let y = i ? 0 : 1, g = $[i] * 2; y < 3 - i; y++, A++) {
+          let et = G[y] * g;
           z += k[A] * et, P += W[A] * et;
         }
       if (l)
         for (let i = 0, A = 0; i < 5; i++)
-          for (let y = i ? 0 : 1, g = G[i] * 2; y < 5 - i; y++, A++)
-            J += S[A] * m[y] * g;
+          for (let y = i ? 0 : 1, g = $[i] * 2; y < 5 - i; y++, A++)
+            J += S[A] * G[y] * g;
       let K = D - 2 / 3 * z, tt = (3 * D - K + P) / 2, At = tt - P;
       v[w] = r(0, 255 * n(1, tt)), v[w + 1] = r(0, 255 * n(1, At)), v[w + 2] = r(0, 255 * n(1, K)), v[w + 3] = r(0, 255 * n(1, J));
     }
@@ -238,6 +238,7 @@ function ft(t = 'img[loading="lazy"]', {
     }
     if (o.src || (o.src = pt), o.complete && o.naturalWidth > 0) {
       console.log(1699882775467, "image already in viewport", {
+        image: o,
         complete: o.complete,
         naturalWidth: o.naturalWidth,
         boundingWidth: o.getBoundingClientRect().width
@@ -296,7 +297,7 @@ function vt({
       console.error(`Error generating ${n} placeholder:`, s);
     }
 }
-const $ = /* @__PURE__ */ new WeakMap();
+const m = /* @__PURE__ */ new WeakMap();
 function Z(t, e) {
   var r;
   if (t.dataset.sizes !== "auto")
@@ -305,13 +306,13 @@ function Z(t, e) {
   if (n && (t.sizes = `${n}px`), ((r = t.parentElement) == null ? void 0 : r.tagName.toLowerCase()) === "picture" && !(e != null && e.skipChildren) && [...t.parentElement.getElementsByTagName("source")].forEach(
     (c) => Z(c, { skipChildren: !0 })
   ), e != null && e.updateOnResize) {
-    if (!$.has(t)) {
+    if (!m.has(t)) {
       const c = wt(() => Z(t), 500), s = new ResizeObserver(c);
-      $.set(t, s), s.observe(t);
+      m.set(t, s), s.observe(t);
     }
     return () => {
-      const c = $.get(t);
-      c && (c.disconnect(), $.delete(t));
+      const c = m.get(t);
+      c && (c.disconnect(), m.delete(t));
     };
   }
 }
