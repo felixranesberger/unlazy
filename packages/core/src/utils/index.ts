@@ -64,11 +64,15 @@ export function waitForElementDimensions<T extends HTMLElement>(element: T): Pro
   if (width > 0)
     return Promise.resolve()
 
+  console.log(1699880827882, 'waiting for element dimensions', element);
+
   return new Promise((resolve) => {
     const observer = new ResizeObserver(() => {
       const { width } = element.getBoundingClientRect()
+      console.log(1699880844909, 'element dimensions changed', { element, width });
       if (width > 0) {
         observer.disconnect()
+        console.log(1699880866850, 'resolving waitForElementDimensions', element);
         resolve()
       }
     });

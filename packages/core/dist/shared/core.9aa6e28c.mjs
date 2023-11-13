@@ -1,5 +1,3 @@
-'use strict';
-
 const isSSR = typeof window === "undefined";
 const isLazyLoadingSupported = !isSSR && "loading" in HTMLImageElement.prototype;
 const isCrawler = !isSSR && (!("onscroll" in window) || /(gle|ing|ro)bot|crawl|spider/i.test(navigator.userAgent));
@@ -42,11 +40,14 @@ function waitForElementDimensions(element) {
   const { width } = element.getBoundingClientRect();
   if (width > 0)
     return Promise.resolve();
+  console.log(1699880827882, "waiting for element dimensions", element);
   return new Promise((resolve) => {
     const observer = new ResizeObserver(() => {
       const { width: width2 } = element.getBoundingClientRect();
+      console.log(1699880844909, "element dimensions changed", { element, width: width2 });
       if (width2 > 0) {
         observer.disconnect();
+        console.log(1699880866850, "resolving waitForElementDimensions", element);
         resolve();
       }
     });
@@ -181,12 +182,4 @@ function rgbaToDataUri(w, h, rgba) {
   return `data:image/png;base64,${base64}`;
 }
 
-exports.base64ToBytes = base64ToBytes;
-exports.debounce = debounce;
-exports.getScaledDimensions = getScaledDimensions;
-exports.isCrawler = isCrawler;
-exports.isLazyLoadingSupported = isLazyLoadingSupported;
-exports.isSSR = isSSR;
-exports.rgbaToDataUri = rgbaToDataUri;
-exports.toElementArray = toElementArray;
-exports.waitForElementDimensions = waitForElementDimensions;
+export { isLazyLoadingSupported as a, isSSR as b, base64ToBytes as c, debounce as d, getScaledDimensions as g, isCrawler as i, rgbaToDataUri as r, toElementArray as t, waitForElementDimensions as w };

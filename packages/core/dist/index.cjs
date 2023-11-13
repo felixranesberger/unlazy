@@ -1,7 +1,7 @@
 'use strict';
 
-const blurhash = require('./shared/core.56344c19.cjs');
-const png = require('./shared/core.29729add.cjs');
+const blurhash = require('./shared/core.c6e289dd.cjs');
+const png = require('./shared/core.8920a54d.cjs');
 const thumbhash = require('./thumbhash.cjs');
 
 function lazyLoad(selectorsOrElements = 'img[loading="lazy"]', {

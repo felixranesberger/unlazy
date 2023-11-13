@@ -1,6 +1,4 @@
-'use strict';
-
-const png = require('./core.29729add.cjs');
+import { g as getScaledDimensions, r as rgbaToDataUri } from './core.9aa6e28c.mjs';
 
 const DEFAULT_PLACEHOLDER_SIZE = 32;
 const DEFAULT_IMAGE_PLACEHOLDER = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
@@ -134,11 +132,9 @@ function createPngDataUri(hash, {
   ratio = 1,
   size = DEFAULT_PLACEHOLDER_SIZE
 } = {}) {
-  const { width, height } = png.getScaledDimensions(ratio, size);
+  const { width, height } = getScaledDimensions(ratio, size);
   const rgba = decodeBlurHash(hash, width, height);
-  return png.rgbaToDataUri(width, height, rgba);
+  return rgbaToDataUri(width, height, rgba);
 }
 
-exports.DEFAULT_IMAGE_PLACEHOLDER = DEFAULT_IMAGE_PLACEHOLDER;
-exports.DEFAULT_PLACEHOLDER_SIZE = DEFAULT_PLACEHOLDER_SIZE;
-exports.createPngDataUri = createPngDataUri;
+export { DEFAULT_IMAGE_PLACEHOLDER as D, DEFAULT_PLACEHOLDER_SIZE as a, createPngDataUri as c };

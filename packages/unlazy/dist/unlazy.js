@@ -1,34 +1,34 @@
-const v = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", z = typeof window > "u", y = !z && "loading" in HTMLImageElement.prototype, L = !z && (!("onscroll" in window) || /(gle|ing|ro)bot|crawl|spider/i.test(navigator.userAgent));
-function p(t, e = document) {
+const S = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7", w = typeof window > "u", y = !w && "loading" in HTMLImageElement.prototype, L = !w && (!("onscroll" in window) || /(gle|ing|ro)bot|crawl|spider/i.test(navigator.userAgent));
+function z(t, e = document) {
   return typeof t == "string" ? [...e.querySelectorAll(t)] : t instanceof Element ? [t] : [...t];
 }
 function R(t, e) {
   let s;
-  return function(...c) {
+  return function(...o) {
     s && clearTimeout(s), s = setTimeout(() => {
-      s = void 0, t(...c);
+      s = void 0, t(...o);
     }, e);
   };
 }
 function C(t) {
   const { width: e } = t.getBoundingClientRect();
-  return e > 0 ? Promise.resolve() : new Promise((s) => {
-    const c = new ResizeObserver(() => {
+  return e > 0 ? Promise.resolve() : (console.log(1699880827882, "waiting for element dimensions", t), new Promise((s) => {
+    const o = new ResizeObserver(() => {
       const { width: n } = t.getBoundingClientRect();
-      n > 0 && (c.disconnect(), s());
+      console.log(1699880844909, "element dimensions changed", { element: t, width: n }), n > 0 && (o.disconnect(), console.log(1699880866850, "resolving waitForElementDimensions", t), s());
     });
-    c.observe(t);
-  });
+    o.observe(t);
+  }));
 }
-function w(t = 'img[loading="lazy"]', {
+function p(t = 'img[loading="lazy"]', {
   hash: e = !0,
   hashType: s = "blurhash",
-  placeholderSize: c = 32,
+  placeholderSize: o = 32,
   updateSizesOnResize: n = !1,
-  onImageLoad: o
+  onImageLoad: c
 } = {}) {
   const i = /* @__PURE__ */ new Set();
-  return p(t).map(async (r) => {
+  return z(t).map(async (r) => {
     await C(r);
     const A = u(r, { updateOnResize: n });
     if (n && A && i.add(A), !r.dataset.src && !r.dataset.srcset) {
@@ -39,11 +39,11 @@ function w(t = 'img[loading="lazy"]', {
       b(r), l(r), f(r);
       return;
     }
-    if (r.src || (r.src = v), r.complete && r.naturalWidth > 0) {
-      d(r, o);
+    if (r.src || (r.src = S), r.complete && r.naturalWidth > 0) {
+      d(r, c);
       return;
     }
-    const E = () => d(r, o);
+    const E = () => d(r, c);
     r.addEventListener("load", E, { once: !0 }), i.add(
       () => r.removeEventListener("load", E)
     );
@@ -54,32 +54,32 @@ function w(t = 'img[loading="lazy"]', {
   };
 }
 function T(t = 'img[data-sizes="auto"], source[data-sizes="auto"]') {
-  for (const e of p(t))
+  for (const e of z(t))
     u(e);
 }
 function d(t, e) {
-  const s = new Image(), { srcset: c, src: n, sizes: o } = t.dataset;
-  if (o === "auto") {
-    const i = S(t);
+  const s = new Image(), { srcset: o, src: n, sizes: c } = t.dataset;
+  if (c === "auto") {
+    const i = v(t);
     i && (s.sizes = `${i}px`);
   } else
     t.sizes && (s.sizes = t.sizes);
-  c && (s.srcset = c), n && (s.src = n), s.addEventListener("load", () => {
+  o && (s.srcset = o), n && (s.src = n), s.addEventListener("load", () => {
     b(t), l(t), f(t), e == null || e(t);
   });
 }
 const a = /* @__PURE__ */ new WeakMap();
 function u(t, e) {
-  var c;
+  var o;
   if (t.dataset.sizes !== "auto")
     return;
-  const s = S(t);
-  if (s && (t.sizes = `${s}px`), ((c = t.parentElement) == null ? void 0 : c.tagName.toLowerCase()) === "picture" && !(e != null && e.skipChildren) && [...t.parentElement.getElementsByTagName("source")].forEach(
+  const s = v(t);
+  if (s && (t.sizes = `${s}px`), ((o = t.parentElement) == null ? void 0 : o.tagName.toLowerCase()) === "picture" && !(e != null && e.skipChildren) && [...t.parentElement.getElementsByTagName("source")].forEach(
     (n) => u(n, { skipChildren: !0 })
   ), e != null && e.updateOnResize) {
     if (!a.has(t)) {
-      const n = R(() => u(t), 500), o = new ResizeObserver(n);
-      a.set(t, o), o.observe(t);
+      const n = R(() => u(t), 500), c = new ResizeObserver(n);
+      a.set(t, c), c.observe(t);
     }
     return () => {
       const n = a.get(t);
@@ -97,20 +97,20 @@ function b(t) {
   const e = t.parentElement;
   (e == null ? void 0 : e.tagName.toLowerCase()) === "picture" && ([...e.querySelectorAll("source[data-srcset]")].forEach(l), [...e.querySelectorAll("source[data-src]")].forEach(f));
 }
-function S(t) {
+function v(t) {
   var e, s;
   return t instanceof HTMLSourceElement ? (s = (e = t.parentElement) == null ? void 0 : e.getElementsByTagName("img")[0]) == null ? void 0 : s.offsetWidth : t.offsetWidth;
 }
-const O = Object.freeze({
+const D = Object.freeze({
   autoSizes: T,
-  lazyLoad: w,
+  lazyLoad: p,
   loadImage: d
 });
 var h;
-(h = document.currentScript) != null && h.hasAttribute("init") && w();
+(h = document.currentScript) != null && h.hasAttribute("init") && p();
 export {
   T as autoSizes,
-  O as default,
-  w as lazyLoad,
+  D as default,
+  p as lazyLoad,
   d as loadImage
 };
